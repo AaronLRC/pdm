@@ -1,0 +1,580 @@
+{% extends 'personal/base.html' %}
+{% load static %}
+
+{% block cabecera %}
+{% comment %}
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to to the body tag
+to get the desired effect
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+{% endcomment %}
+{% endblock cabecera %}
+
+
+{% block contenido %}
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                {% comment %}
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Reporte económico mensual de ventas y compras</h5>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fas fa-wrench"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <a href="#" class="dropdown-item">Falta agregar acciones</a>
+                                    <a class="dropdown-divider"></a> 
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <p class="d-flex flex-column">
+                                            <span class="text-bold text-lg">{{cantidadPlatosMes}}</span>
+                                            <span>Platos vendidos este mes</span>
+                                        </p>
+                                        <p class="ml-auto d-flex flex-column text-right">
+                                            <span class="text-bold text-success">
+                                                <i class="fas fa-arrow-up"></i> {{porcentajeRespectoMesAnterior}}%
+                                            </span>
+                                            <span class="text-muted">Respecto al mes anterior</span>
+                                        </p>
+                                    </div>
+
+                                    <div class="position-relative mb-4">
+                                        <canvas id="visitors-chart" height="200"></canvas>
+                                    </div>
+
+                                    <div class="d-flex flex-row justify-content-end">
+                                        <span class="mr-2">
+                                            <i class="fas fa-square text-danger"></i> Compras &nbsp;
+                                        </span>
+                                        <span>
+                                            <i class="fas fa-square text-success"></i> Ventas &nbsp;
+                                        </span>
+                                        <span>
+                                            <i class="fas fa-square text-primary"></i> Ingresos &nbsp;
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="text-center">
+                                    <strong>Metas del mes</strong>
+                                </p>
+
+                                <div class="progress-group">
+                                    Agregar platos a la carta
+                                    <span class="float-right"><b>160</b>/200</span>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-primary" style="width: 80%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="progress-group">
+                                    Cobrar pensiones
+                                    <span class="float-right"><b>310</b>/400</span>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-danger" style="width: 75%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="progress-group">
+                                    <span class="progress-text"> Visit Premium Page
+                                    </span>
+                                    <span class="float-right"><b>480</b>/800</span>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-success" style="width: 60%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="progress-group">
+                                    Send Inquiries
+                                    <span class="float-right"><b>250</b>/500</span>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-warning">
+                                        <i class="fas fa-caret-left"></i>
+                                        <strong>{{porcentajeComprasMesActual}} %</strong>
+                                    </span>
+                                    <h5 class="description-header">S/. {{montoComprasMesActual}}</h5>
+                                    <span class="description-text">EN COMPRAS ESTE MES</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-success">
+                                        <i class="fas fa-caret-up"></i>
+                                        <strong>{{porcentajeVentasMesActual}} %</strong>
+                                    </span>
+                                    <h5 class="description-header">S/. {{montoVentasMesActual}}</h5>
+                                    <span class="description-text">EN VENTAS ESTE MES</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-success">
+                                        <i class="fas fa-caret-up"></i>
+                                        <strong>{{porcentajeIngresosMesActual}} %</strong>
+                                    </span>
+                                    <h5 class="description-header">S/. {{montoIngresosMesActual}}</h5>
+                                    <span class="description-text">EN INGRESOS ESTE MES</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block">
+                                    <span class="description-percentage text-danger">
+                                        <i class="fas fa-caret-down"></i>
+                                        <strong>{{porcentajeImpuestosMesActual}} %</strong>
+                                    </span>
+                                    <h5 class="description-header">S/. {{montoImpuestosMesActual}}</h5>
+                                    <span class="description-text">EN IMPUESTOS ESTE MES</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col center-block text-center">
+                                <a href="dashboard/reporte_economico" class="btn btn-sm btn-primary float-center">
+                                    Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endcomment %}
+                <!-- TABLE: LATEST ORDERS -->
+
+                <div class="row">
+                    <div class="col-md-8">
+                        {% comment %}
+                        <div class="card">
+                            <div class="card-header border-transparent">
+                                <h3 class="card-title">Productos agotándose</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Producto</th>
+                                                <th>Estado</th>
+                                                <th>Cantidad</th>
+                                                <th>Unidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="pages/examples/invoice.html">1</a></td>
+                                                <td>Arroz</td>
+                                                <td>
+                                                    <span class="badge badge-success">Suficiente</span>
+                                                    <span class="badge badge-warning">Cronogramar</span>
+                                                    <span class="badge badge-danger">Crítico</span>
+                                                    <span class="badge badge-info">Completo</span>
+                                                </td>
+                                                <td>
+                                                    <div class="sparkbar" data-color="#00a65a" data-height="20">1000
+                                                    </div>
+
+                                                </td>
+                                                <td>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer text-center">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-primary float-center">Ver más</a>
+                            </div>
+                            <!-- /.card-footer -->
+                        </div>
+                        {% endcomment %}
+                    </div>
+                    <!-- /.card -->
+                    <div class="col-md-4">
+                        <!-- COMPRAS LIST -->
+                        {% comment %}
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Últimas boletas de <strong>compra</strong></h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <ul class="products-list product-list-in-card pl-2 pr-2">
+                                    {% for boleta in tablaBoletasCompra%}
+                                    {% if  forloop.counter <= maxItemTabla %}
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img src="{% static 'dist/img/default-150x150.png' %}" alt="Product Image"
+                                                class="img-size-50">
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="javascript:void(0)" class="product-title">
+                                                N° {{boleta.boleta_compra}}
+                                                <span class="badge badge-warning float-right">
+                                                    S/. {{boleta.precio_total}}
+                                                </span>
+                                            </a>
+                                            <span class="product-description">
+                                                <strong>Nro. de productos:</strong> {{boleta.nro_productos}}
+                                                <br>
+                                                <strong>Proveedor: </strong> {{boleta.boleta_compra.proveedor.nombre}}
+                                                </br>
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <!-- /.item -->
+                                    {% endif %}
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer text-center">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-primary float-center">Ver más</a>
+                            </div>
+                            <!-- /.card-footer -->
+                        </div>
+                        {% endcomment %}
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-8">
+                        {% comment %}
+                        <div class="card">
+                            <!-- Header -->
+                            <div class="card-header border-0">
+                                <div class="d-flex justify-content-between">
+                                    <h3 class="card-title">Cantidad de platos vendidos</h3>
+                                    <div class="card-tools">
+
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Body -->
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <p class="d-flex flex-column">
+                                        <span class="text-bold text-lg">7,512</span>
+                                        <span>Platos vendidos este mes</span>
+                                    </p>
+                                    <p class="ml-auto d-flex flex-column text-right">
+                                        <span class="text-success">
+                                            <i class="fas fa-arrow-up"></i> 33.1%
+                                        </span>
+                                        <span class="text-muted">Desde el mes pasado</span>
+                                    </p>
+                                </div>
+                                <!-- /.d-flex -->
+                                <div class="position-relative mb-4">
+                                    <canvas id="sales-chart" height="200"></canvas>
+                                </div>
+                                <div class="d-flex flex-row justify-content-end">
+                                    <span class="mr-2">
+                                        <i class="fas fa-square text-primary"></i> Pensión &nbsp;
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-square text-success"></i> Efectivo &nbsp;
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-square text-warning"></i> Efectivo &nbsp;
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- Footer-->
+                            <div class="card-footer text-center">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-primary float-center">Ver más</a>
+                            </div>
+                        </div>
+                        {% endcomment %}
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.card -->
+                    <div class="col-md-4">
+                        <!-- VENTAS RESTAURANTE LIST -->
+                        {% comment %}
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Últimas boletas de <strong>venta</strong></h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <ul class="products-list product-list-in-card pl-2 pr-2">
+                                    {% for boleta in tablaBoletasVenta%}
+                                    {% if  forloop.counter <= maxItemTabla %}
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img src="{% static 'dist/img/default-150x150.png' %}" alt="Product Image"
+                                                class="img-size-50">
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="javascript:void(0)" class="product-title">
+                                                N° {{boleta.boleta_venta_restaurante}}
+                                                <span class="badge badge-success float-right">
+                                                    S/. {{boleta.precio_total}}
+                                                </span>
+                                            </a>
+                                            <span class="product-description">
+                                                <strong>Nro. de productos:</strong> {{boleta.nro_productos}}
+                                                <br>
+                                                <strong>Cliente: </strong>Falta setear clientes
+                                                </br>
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <!-- /.item -->
+                                    {% endif %}
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer text-center">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-primary float-center">Ver más</a>
+                            </div>
+                            <!-- /.card-footer -->
+                        </div>
+                        {% endcomment %}
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+{% endblock contenido %}
+
+
+{% block pie %}
+
+<!-- ChartJS -->
+<script src=" {% static '2/plugins/chart.js/Chart.min.js' %}"></script>
+
+{% comment %} <script src=" {% static '2/dist/js/demo.js' %}"></script> {% endcomment %}
+
+<script>
+    $(function () {
+        'use strict'
+
+        var ticksStyle = {
+            fontColor: '#495057',
+            fontStyle: 'bold'
+        }
+
+        var mode = 'index'
+        var intersect = true
+
+        /////////////////////////////////
+
+        var $salesChart = $('#sales-chart')
+        var salesChart = new Chart($salesChart, {
+            type: 'bar',
+            data: {
+                labels: ['JUN', 'JUL', 'AGO', 'SET', 'OCT', 'NOV', 'DIC'],
+                datasets: [{
+                        backgroundColor: '#007bff',
+                        borderColor: '#007bff',
+                        data: [1000, 2000, 3000, 2500, 2700, 2500, 3000]
+                    },
+                    {
+                        backgroundColor: '#28a745',
+                        borderColor: '#28a745',
+                        data: [700, 1700, 2700, 2000, 1800, 1500, 2000]
+                    },
+                    {
+                        backgroundColor: '#ffc107',
+                        borderColor: '#ffc107',
+                        data: [500, 1000, 10, 150, 485, 780, 150]
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    mode: mode,
+                    intersect: intersect
+                },
+                hover: {
+                    mode: mode,
+                    intersect: intersect
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        // display: false,
+                        gridLines: {
+                            display: true,
+                            lineWidth: '4px',
+                            color: 'rgba(0, 0, 0, .2)',
+                            zeroLineColor: 'transparent'
+                        },
+                        ticks: $.extend({
+                            beginAtZero: true,
+
+                            // Include a dollar sign in the ticks
+                            callback: function (value, index, values) {
+                                if (value >= 1000) {
+                                    value /= 1000
+                                    value += 'k'
+                                }
+                                return '$' + value
+                            }
+                        }, ticksStyle)
+                    }],
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: ticksStyle
+                    }]
+                }
+            }
+        })
+
+        /////////////////////////////////
+
+
+        var $visitorsChart = $('#visitors-chart')
+        var visitorsChart = new Chart($visitorsChart, {
+            data: {
+                labels: ['18', '19', '20', '21', '22', '23', '24'],
+                datasets: [{
+                        type: 'line',
+                        data: [10, 15, 10, 25, 40, 15, 50],
+                        backgroundColor: 'transparent',
+                        borderColor: '#dc3545',
+                        pointBorderColor: '#dc3545',
+                        pointBackgroundColor: '#dc3545',
+                        fill: false
+                        // pointHoverBackgroundColor: '#007bff',
+                        // pointHoverBorderColor    : '#007bff'
+                    },
+                    {
+                        type: 'line',
+                        data: [100, 120, 170, 167, 180, 177, 160],
+                        backgroundColor: 'transparent',
+                        borderColor: '#28a745',
+                        pointBorderColor: '#28a745',
+                        pointBackgroundColor: '#28a745',
+                        fill: false
+                        // pointHoverBackgroundColor: '#ced4da',
+                        // pointHoverBorderColor    : '#ced4da'
+                    },
+                    {
+                        type: 'line',
+                        data: [60, 80, 70, 67, 80, 77, 100],
+                        backgroundColor: 'transparent',
+                        borderColor: '#007bff',
+                        pointBorderColor: '#007bff',
+                        pointBackgroundColor: '#007bff',
+                        fill: false
+                        // pointHoverBackgroundColor: '#ced4da',
+                        // pointHoverBorderColor    : '#ced4da'
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    mode: mode,
+                    intersect: intersect
+                },
+                hover: {
+                    mode: mode,
+                    intersect: intersect
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true,
+                            lineWidth: '4px',
+                            color: 'rgba(0, 0, 0, .2)',
+                            zeroLineColor: 'transparent'
+                        },
+                        ticks: $.extend({
+                            beginAtZero: true,
+                            suggestedMax: 200
+                        }, ticksStyle)
+                    }],
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true
+                        },
+                        ticks: ticksStyle
+                    }]
+                }
+            }
+        })
+    })
+</script>
+
+
+{% endblock pie %}

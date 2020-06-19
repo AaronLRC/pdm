@@ -1,0 +1,618 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block cabecera %}
+{% comment %}
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to to the body tag
+to get the desired effect
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+{% endcomment %}
+{% endblock cabecera %}
+
+
+{% block contenido %}
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Macro reporte de dispositivos de sensado</h5>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fas fa-wrench"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <a href="#" class="dropdown-item">Falta agregar acciones</a>
+                                    <a class="dropdown-divider"></a> <!-- Es un divisor-->
+
+                                </div>
+                            </div>
+                            {% comment %}
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            {% endcomment %}
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                {% comment %} <div class="card-header border-0">
+                                    <div class="d-flex justify-content-between">
+                                        <h3 class="card-title"><strong>Compras, ventas e ingresos de la
+                                                semana</strong></h3>
+                                        <a href="javascript:void(0);">Ver completo</a>
+                                    </div>
+                                </div> {% endcomment %}
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <p class="d-flex flex-column">
+                                            <span class="text-bold text-lg">{{cantidadPlatosMes}}</span>
+                                            <span>Indicadores mensuales de sensado</span>
+                                        </p>
+                                        <p class="ml-auto d-flex flex-column text-right">
+                                            <span class="text-bold text-success">
+                                                <i class="fas fa-arrow-up"></i> {{porcentajeRespectoMesAnterior}}%
+                                            </span>
+                                            <span class="text-muted">Respecto al mes anterior</span>
+                                        </p>
+                                    </div>
+                                    <!-- /.d-flex -->
+
+                                    <div class="position-relative mb-4">
+                                        <canvas id="visitors-chart" height="200"></canvas>
+                                    </div>
+
+                                    <div class="d-flex flex-row justify-content-end">
+                                        <span class="mr-2">
+                                            <i class="fas fa-square text-danger"></i> P.A. &nbsp;
+                                        </span>
+                                        <span>
+                                            <i class="fas fa-square text-success"></i> F.R. &nbsp;
+                                        </span>
+                                        <span>
+                                            <i class="fas fa-square text-primary"></i> T.C. &nbsp;
+                                        </span>
+                                        <span>
+                                            <i class="fas fa-square text-fuchsia"></i> N° de caídas &nbsp;
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-4">
+                                <p class="text-center">
+                                    <strong>Cifras</strong>
+                                </p>
+
+                                <div class="progress-group">
+                                    Presión arterial media mensual
+                                    <span class="float-right"><b>90</b>/120</span>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-primary" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                                <!-- /.progress-group -->
+
+                                <div class="progress-group">
+                                    Frecuencia respiratoria mensual
+                                    <span class="float-right"><b>75</b>/100</span>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-danger" style="width: 75%"></div>
+                                    </div>
+                                </div>
+
+                                <!-- /.progress-group -->
+                                <div class="progress-group">
+                                    <span class="progress-text">
+                                        Temperatura corporal media mensual
+                                    </span>
+                                    <span class="float-right"><b>37.5</b>/40</span>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-success" style="width: 60%"></div>
+                                    </div>
+                                </div>
+
+                                <!-- /.progress-group -->
+                                <div class="progress-group">
+                                    Cantidad de caídas mensuales
+                                    <span class="float-right"><b>3</b></span>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                                    </div>
+                                </div>
+                                <!-- /.progress-group -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- ./card-body -->
+                    <div class="card-footer">
+                        <div class="row">
+
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-warning">
+                                        <i class="fas fa-caret-left"></i>
+                                        <strong>{{ indicador1_porcentaje }}</strong>
+                                    </span>
+                                    <h5 class="description-header">{{ indicador1 }}</h5>
+                                    <span class="description-text">HORAS OPERATIVAS</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-success">
+                                        <i class="fas fa-caret-up"></i>
+                                        <strong>{{ indicador2_porcentaje }}</strong>
+                                    </span>
+                                    <h5 class="description-header">{{ indicador2 }}</h5>
+                                    <span class="description-text">HORAS SENSADAS</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-success">
+                                        <i class="fas fa-caret-up"></i>
+                                        <strong>{{ indicador3_porcentaje }}</strong>
+                                    </span>
+                                    <h5 class="description-header">{{ indicador3 }}</h5>
+                                    <span class="description-text">ANOMALÍAS ENCONTRADAS</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block">
+                                    <span class="description-percentage text-danger">
+                                        <i class="fas fa-caret-down"></i>
+                                        <strong>{{ indicador4_porcentaje }}</strong>
+                                    </span>
+                                    <h5 class="description-header">{{ indicador4 }}</h5>
+                                    <span class="description-text">CAÍDAS MENSUALES</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                        <div class="row">
+                            <div class="col center-block text-center">
+                                <a href="dashboard/reporte_economico" class="btn btn-sm btn-primary float-center">
+                                    Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+                <!-- TABLE: LATEST ORDERS -->
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header border-transparent">
+                                <h3 class="card-title">Lista de sensores operativos</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <!-- 
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    -->
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>#Kit</th>
+                                                <th>Sensor</th>
+                                                <th>#Usuario</th>
+                                                <th>Estado</th>                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                {% comment %} <td><a href="pages/examples/invoice.html">1</a></td>
+                                                {% endcomment %}
+                                                <td><a href="pages/examples/invoice.html">MXKS39X</a></td>
+                                                <td>P.A.</td>
+                                                <td>
+                                                    <div class="sparkbar" data-color="#00a65a" data-height="20">1000
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-success">Conectado y enviando</span><br>                                        
+                                                    <span class="badge badge-info">Conectado </span><br>
+                                                    <span class="badge badge-warning">Conectando...</span><br>
+                                                    <span class="badge badge-danger">Sin conexión</span><br>
+                                                </td>                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer text-center">
+                                {% comment %} <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place
+                                    New Order</a> {% endcomment %}
+                                <a href="javascript:void(0)" class="btn btn-sm btn-primary float-center">Ver más</a>
+                            </div>
+                            <!-- /.card-footer -->
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                    <div class="col-md-4">
+                        <!-- VENTAS RESTAURANTE LIST -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Últimas ventas de <strong>kits</strong></h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    {% comment %}
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    {% endcomment %}
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <ul class="products-list product-list-in-card pl-2 pr-2">
+                                    {% for boleta in tablaBoletasVenta%}
+                                    {% if  forloop.counter <= maxItemTabla %}
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img src="{% static 'dist/img/default-150x150.png' %}" alt="Product Image"
+                                                class="img-size-50">
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="javascript:void(0)" class="product-title">
+                                                N° {{boleta.boleta_venta_restaurante}}
+                                                <span class="badge badge-success float-right">
+                                                    S/. {{boleta.precio_total}}
+                                                </span>
+                                            </a>
+                                            <span class="product-description">
+                                                <strong>Nro. de productos:</strong> {{boleta.nro_productos}}
+                                                <br>
+                                                <strong>Cliente: </strong>Falta setear clientes
+                                                </br>
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <!-- /.item -->
+                                    {% endif %}
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer text-center">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-primary float-center">Ver más</a>
+                            </div>
+                            <!-- /.card-footer -->
+                        </div>
+                    </div>                    
+                    <!-- /.card -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <!-- Header -->
+                            <div class="card-header border-0">
+                                <div class="d-flex justify-content-between">
+                                    <h3 class="card-title">Cantidad de sensores operativos</h3>
+                                    <div class="card-tools">
+
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Body -->
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <p class="d-flex flex-column">
+                                        <span class="text-bold text-lg">7,512</span>
+                                        <span>más sensores operativos</span>
+                                    </p>
+                                    <p class="ml-auto d-flex flex-column text-right">
+                                        <span class="text-success">
+                                            <i class="fas fa-arrow-up"></i> 5%
+                                        </span>
+                                        <span class="text-muted">Desde el mes pasado</span>
+                                    </p>
+                                </div>
+                                <!-- /.d-flex -->
+                                <div class="position-relative mb-4">
+                                    <canvas id="sales-chart" height="200"></canvas>
+                                </div>
+                                <div class="d-flex flex-row justify-content-end">
+                                    <span class="mr-2">
+                                        <i class="fas fa-square text-primary"></i> Kits &nbsp;
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-square text-success"></i> Sensores &nbsp;
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-square text-warning"></i> Usuarios &nbsp;
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- Footer-->
+                            <div class="card-footer text-center">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-primary float-center">Ver más</a>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.card -->
+                    <!-- 
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Últimas ventas de <strong>kits</strong></h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    {% comment %}
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    {% endcomment %}
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <ul class="products-list product-list-in-card pl-2 pr-2">
+                                    {% for boleta in tablaBoletasCompra%}
+                                    {% if  forloop.counter <= maxItemTabla %}
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img src="{% static 'dist/img/default-150x150.png' %}" alt="Product Image"
+                                                class="img-size-50">
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="javascript:void(0)" class="product-title">
+                                                N° {{boleta.boleta_compra}}
+                                                <span class="badge badge-warning float-right">
+                                                    S/. {{boleta.precio_total}}
+                                                </span>
+                                            </a>
+                                            <span class="product-description">
+                                                <strong>Nro. de productos:</strong> {{boleta.nro_productos}}
+                                                <br>
+                                                <strong>Proveedor: </strong> {{boleta.boleta_compra.proveedor.nombre}}
+                                                </br>
+                                            </span>
+                                        </div>
+                                    </li>       
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-primary float-center">Ver más</a>
+                            </div>
+                            
+                        </div>
+                    </div> 
+                    -->
+                    <!-- /.card -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+
+
+{% endblock contenido %}
+
+
+{% block pie %}
+
+<!-- ChartJS -->
+<script src=" {% static '2/plugins/chart.js/Chart.min.js' %}"></script>
+
+{% comment %} <script src=" {% static '2/dist/js/demo.js' %}"></script> {% endcomment %}
+
+<script>
+    $(function () {
+        'use strict'
+
+        var ticksStyle = {
+            fontColor: '#495057',
+            fontStyle: 'bold'
+        }
+
+        var mode = 'index'
+        var intersect = true
+
+        /////////////////////////////////
+
+        var $salesChart = $('#sales-chart')
+        var salesChart = new Chart($salesChart, {
+            type: 'bar',
+            data: {
+                labels: ['JUN', 'JUL', 'AGO', 'SET', 'OCT', 'NOV', 'DIC'],
+                datasets: [{
+                        backgroundColor: '#007bff',
+                        borderColor: '#007bff',
+                        data: [1000, 2000, 3000, 2500, 2700, 2500, 3000]
+                    },
+                    {
+                        backgroundColor: '#28a745',
+                        borderColor: '#28a745',
+                        data: [700, 1700, 2700, 2000, 1800, 1500, 2000]
+                    },
+                    {
+                        backgroundColor: '#ffc107',
+                        borderColor: '#ffc107',
+                        data: [500, 1000, 10, 150, 485, 780, 150]
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    mode: mode,
+                    intersect: intersect
+                },
+                hover: {
+                    mode: mode,
+                    intersect: intersect
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        // display: false,
+                        gridLines: {
+                            display: true,
+                            lineWidth: '4px',
+                            color: 'rgba(0, 0, 0, .2)',
+                            zeroLineColor: 'transparent'
+                        },
+                        ticks: $.extend({
+                            beginAtZero: true,
+
+                            // Include a dollar sign in the ticks
+                            callback: function (value, index, values) {
+                                if (value >= 1000) {
+                                    value /= 1000
+                                    value += 'k'
+                                }
+                                return '$' + value
+                            }
+                        }, ticksStyle)
+                    }],
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: ticksStyle
+                    }]
+                }
+            }
+        })
+
+        /////////////////////////////////
+
+
+        var $visitorsChart = $('#visitors-chart')
+        var visitorsChart = new Chart($visitorsChart, {
+            data: {
+                labels: ['18', '19', '20', '21', '22', '23', '24'],
+                datasets: [{
+                        type: 'line',
+                        data: [10, 15, 10, 25, 40, 15, 50],
+                        backgroundColor: 'transparent',
+                        borderColor: '#dc3545',
+                        pointBorderColor: '#dc3545',
+                        pointBackgroundColor: '#dc3545',
+                        fill: false
+                        // pointHoverBackgroundColor: '#007bff',
+                        // pointHoverBorderColor    : '#007bff'
+                    },
+                    {
+                        type: 'line',
+                        data: [100, 120, 170, 167, 180, 177, 160],
+                        backgroundColor: 'transparent',
+                        borderColor: '#28a745',
+                        pointBorderColor: '#28a745',
+                        pointBackgroundColor: '#28a745',
+                        fill: false
+                        // pointHoverBackgroundColor: '#ced4da',
+                        // pointHoverBorderColor    : '#ced4da'
+                    },
+                    {
+                        type: 'line',
+                        data: [60, 80, 70, 67, 80, 77, 100],
+                        backgroundColor: 'transparent',
+                        borderColor: '#007bff',
+                        pointBorderColor: '#007bff',
+                        pointBackgroundColor: '#007bff',
+                        fill: false
+                        // pointHoverBackgroundColor: '#ced4da',
+                        // pointHoverBorderColor    : '#ced4da'
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    mode: mode,
+                    intersect: intersect
+                },
+                hover: {
+                    mode: mode,
+                    intersect: intersect
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true,
+                            lineWidth: '4px',
+                            color: 'rgba(0, 0, 0, .2)',
+                            zeroLineColor: 'transparent'
+                        },
+                        ticks: $.extend({
+                            beginAtZero: true,
+                            suggestedMax: 200
+                        }, ticksStyle)
+                    }],
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true
+                        },
+                        ticks: ticksStyle
+                    }]
+                }
+            }
+        })
+    })
+</script>
+
+
+{% endblock pie %}

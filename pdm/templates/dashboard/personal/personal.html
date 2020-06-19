@@ -1,0 +1,712 @@
+{% extends 'dashboard/base.html' %}
+
+{% load static %}
+
+{% block cabecera %}
+<!-- Select2 -->
+<link rel="stylesheet" href="{% static '2/plugins/select2/css/select2.min.css' %}">
+<link rel="stylesheet" href="{% static '2/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
+<!-- DataTables -->
+<link rel="stylesheet" href="{% static '2/plugins/datatables-bs4/css/dataTables.bootstrap4.css' %}">
+
+<!-- Para que la tabla no sea muy grande-->
+<style>
+    .table td,
+    .table th {
+
+        padding: 0.5rem;
+        vertical-align: middle;
+    }
+</style>
+{% endblock cabecera %}
+
+
+{% block contenido %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card col-md-8">
+                    <div class="card-header">
+                        <h3 class="card-title"><strong>Personal</strong></h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive ">
+                        <div class="container">
+                            <div class="input-group md-form form-sm form-1 pl-0">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text cyan" id="basic-text1"><i
+                                            class="fas fa-search text-cyan" aria-hidden="true"></i></span>
+                                </div>
+                                <input class="form-control my-0 py-1" type="text"
+                                    placeholder="Buscar por DNI, nombre, apellido, edad" aria-label="Search">
+                            </div>
+                            <p></p>
+                            <div class="row">
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="btn btn-info">Nombres</button>
+                                    </div>
+                                    <!-- /btn-group -->
+                                    <input type="text" class="form-control" readonly="true"
+                                        placeholder="Realice una búsqueda">
+                                </div>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="btn btn-info">DNI</button>
+                                    </div>
+                                    <!-- /btn-group -->
+                                    <input type="text" class="form-control" readonly="true"
+                                        placeholder="Realice una búsqueda">
+                                </div>
+                            </div>
+                            <p></p>
+                            <div class="row">
+                                <div class="input-group col-sm-4">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="btn btn-info">#Kit</button>
+                                    </div>
+                                    <!-- /btn-group -->
+                                    <input type="text" class="form-control" readonly="true"
+                                        placeholder="Realice una búsqueda">
+                                </div>
+                                <div class="input-group col-sm-4">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="btn btn-info">Edad</button>
+                                    </div>
+                                    <!-- /btn-group -->
+                                    <input type="text" class="form-control" readonly="true"
+                                        placeholder="Realice una búsqueda">
+                                </div>
+                                <div class="input-group col-sm-4">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="btn btn-info">Celular</button>
+                                    </div>
+                                    <!-- /btn-group -->
+                                    <input type="text" class="form-control" readonly="true"
+                                        placeholder="Realice una búsqueda">
+                                </div>
+                            </div>
+                            <p></p>
+                            <div></div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer ">
+                        <button type="submit" class="btn btn-info float-right">Obtener datos del Kit</button>
+                    </div>
+                </div>
+                <!-- /.card -->
+
+                <div class="card col-md-12">
+                    <div class="card-header">
+                        <h3 class="card-title"><strong>Datos en tiempo real</strong></h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive ">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="card card-primary card-outline">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="far fa-chart-bar"></i>
+                                                Frecuencia cardíaca
+                                            </h3>
+
+                                            <div class="card-tools">
+                                                Tiempo real
+                                                <div class="btn-group" id="realtime" data-toggle="btn-toggle">
+                                                    <button type="button" class="btn btn-default btn-sm active"
+                                                        data-toggle="on">On</button>
+                                                    <button type="button" class="btn btn-default btn-sm"
+                                                        data-toggle="off">Off</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="interactive" style="height: 300px;"></div>
+                                        </div>
+                                        <!-- /.card-body-->
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                                <div class="col-6">
+                                    <div class="card card-primary card-outline">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="far fa-chart-bar"></i>
+                                                Presión arterial
+                                            </h3>
+
+                                            <div class="card-tools">
+                                                Tiempo real
+                                                <div class="btn-group" id="realtime2" data-toggle="btn-toggle">
+                                                    <button type="button" class="btn btn-default btn-sm active"
+                                                        data-toggle="on">On</button>
+                                                    <button type="button" class="btn btn-default btn-sm"
+                                                        data-toggle="off">Off</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="interactive2" style="height: 300px;"></div>
+                                        </div>
+                                        <!-- /.card-body-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- row -->
+                            <p></p>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="card card-primary card-outline">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="far fa-chart-bar"></i>
+                                                # Caídas
+                                            </h3>
+
+                                            <div class="card-tools">
+                                                Tiempo real
+                                                <div class="btn-group" id="realtime3" data-toggle="btn-toggle">
+                                                    <button type="button" class="btn btn-default btn-sm active"
+                                                        data-toggle="on">On</button>
+                                                    <button type="button" class="btn btn-default btn-sm"
+                                                        data-toggle="off">Off</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="interactive3" style="height: 300px;"></div>
+                                        </div>
+                                        <!-- /.card-body-->
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                                <div class="col-6">
+                                    <div class="card card-primary card-outline">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="far fa-chart-bar"></i>
+                                                Temperatura corporal
+                                            </h3>
+
+                                            <div class="card-tools">
+                                                Tiempo real
+                                                <div class="btn-group" id="realtime4" data-toggle="btn-toggle">
+                                                    <button type="button" class="btn btn-default btn-sm active"
+                                                        data-toggle="on">On</button>
+                                                    <button type="button" class="btn btn-default btn-sm"
+                                                        data-toggle="off">Off</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="interactive4" style="height: 300px;"></div>
+                                        </div>
+                                        <!-- /.card-body-->
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                                <p></p>
+                                <div class="col-12">
+                                    <div class="card card-primary card-outline">
+                                        <div class="card-header text-center">
+                                            <strong> Estadísticas importantes</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="container-fluid bg-primary p-3 my-3">
+                                                <h4>Estadísticas de frecuencia cardíaca</h4>
+                                                <div class="row col-12">
+                                                    <div class="input-group col-4">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-info">Mín</button>
+                                                        </div>
+                                                        <!-- /btn-group -->
+                                                        <input type="text" class="form-control" readonly="true"
+                                                            placeholder="Obteniendo valor...">
+                                                    </div>
+                                                    <div class="input-group  col-4">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-info">Promedio</button>
+                                                        </div>
+                                                        <!-- /btn-group -->
+                                                        <input type="text" class="form-control" readonly="true"
+                                                            placeholder="Obteniendo valor...">
+                                                    </div>
+                                                    <div class="input-group col-4">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-info">Máx</button>
+                                                        </div>
+                                                        <!-- /btn-group -->
+                                                        <input type="text" class="form-control" readonly="true"
+                                                            placeholder="Obteniendo valor...">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p></p>
+                                            <!-- 2 -->
+                                            <div class="container-fluid bg-success p-3 my-3">
+                                                <h4>Estadísticas de presión arterial</h4>
+                                                <div class="row col-12">
+                                                    <div class="input-group col-4">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-info">Mín</button>
+                                                        </div>
+                                                        <!-- /btn-group -->
+                                                        <input type="text" class="form-control" readonly="true"
+                                                            placeholder="Obteniendo valor...">
+                                                    </div>
+                                                    <div class="input-group  col-4">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-info">Promedio</button>
+                                                        </div>
+                                                        <!-- /btn-group -->
+                                                        <input type="text" class="form-control" readonly="true"
+                                                            placeholder="Obteniendo valor...">
+                                                    </div>
+                                                    <div class="input-group col-4">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-info">Máx</button>
+                                                        </div>
+                                                        <!-- /btn-group -->
+                                                        <input type="text" class="form-control" readonly="true"
+                                                            placeholder="Obteniendo valor...">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p></p>
+                                            <!-- 3 -->
+                                            <div class="container-fluid bg-danger p-3 my-3">
+                                                <h4>Estadísticas de caídas</h4>
+                                                <div class="row col-12">
+                                                    <div class="input-group col-4">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-info">Mín</button>
+                                                        </div>
+                                                        <!-- /btn-group -->
+                                                        <input type="text" class="form-control" readonly="true"
+                                                            placeholder="Obteniendo valor...">
+                                                    </div>
+                                                    <div class="input-group  col-4">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-info">Promedio</button>
+                                                        </div>
+                                                        <!-- /btn-group -->
+                                                        <input type="text" class="form-control" readonly="true"
+                                                            placeholder="Obteniendo valor...">
+                                                    </div>
+                                                    <div class="input-group col-4">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-info">Máx</button>
+                                                        </div>
+                                                        <!-- /btn-group -->
+                                                        <input type="text" class="form-control" readonly="true"
+                                                            placeholder="Obteniendo valor...">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p></p>
+                                            <!-- 4 -->
+                                            <div class="container-fluid bg-dark p-3 my-3">
+                                                <h4>Estadísticas de temperatura corporal</h4>
+                                                <div class="row col-12">
+                                                    <div class="input-group col-4">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-info">Mín</button>
+                                                        </div>
+                                                        <!-- /btn-group -->
+                                                        <input type="text" class="form-control" readonly="true"
+                                                            placeholder="Obteniendo valor...">
+                                                    </div>
+                                                    <div class="input-group  col-4">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-info">Promedio</button>
+                                                        </div>
+                                                        <!-- /btn-group -->
+                                                        <input type="text" class="form-control" readonly="true"
+                                                            placeholder="Obteniendo valor...">
+                                                    </div>
+                                                    <div class="input-group col-4">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-info">Máx</button>
+                                                        </div>
+                                                        <!-- /btn-group -->
+                                                        <input type="text" class="form-control" readonly="true"
+                                                            placeholder="Obteniendo valor...">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body-->
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+
+<!-- ADD MODALS HERE-->
+
+<!-- Modal para confirmación de BoletaCompra.Valido-->
+<div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Confirmación</h4>
+            </div>
+            <div class="modal-body">
+                ¿Está seguro que desea cambiar la validez de la boleta?<br>
+                Esto afectará al libro contable y balance económico.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
+
+<!-- /.MODALS-->
+{% endblock contenido %}
+
+
+{% block pie %}
+
+<!-- Select2 -->
+<script src="{% static '2/plugins/select2/js/select2.full.min.js' %}"></script>
+<!-- DataTables -->
+<script src="{% static '2/plugins/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static '2/plugins/datatables-bs4/js/dataTables.bootstrap4.js' %}"></script>
+<!-- Bootstrap Switch -->
+<script src="{% static '2/plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}"></script>
+<!-- Toastr -->
+<script src="{% static '2/plugins/toastr/toastr.min.js' %}"></script>
+<!-- Interactive Float Chart-->
+<script src="{% static '2/plugins/flot/jquery.flot.js' %}"></script>
+<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+<script src="{% static '2/plugins/flot-old/jquery.flot.resize.min.js' %}"></script>
+<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+<script src="{% static '2/plugins/flot-old/jquery.flot.pie.min.js' %}"></script>
+
+<!-- Add here more js -->
+
+
+<!-- Page script -->
+<script type="text/javascript">
+    var objetos_globales = {};
+
+    $(document).ready(function () {
+
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+
+        //Initialize switch
+        $("input[data-bootstrap-switch]").each(function () {
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        });
+
+        // Tabla Historial Datatable
+        $('#tablaHistorial').DataTable({
+            "oLanguage": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla =(",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                },
+                "buttons": {
+                    "copy": "Copiar",
+                    "colvis": "Visibilidad"
+                },
+            },
+        });
+
+        //AJAX para actualizar si la boleta es válida
+
+        $('.switch').on('switchChange.bootstrapSwitch', function (e, data) {
+            objetos_globales.numero_switch = e.target.value;
+            $('#switch_' + objetos_globales.numero_switch).bootstrapSwitch('state', !data, true);
+            $('#showModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        });
+
+        $(".modal-footer .btn-primary").on('click', function () {
+            $('#showModal').modal('hide');
+            $("#loader_bg").show();
+            $.ajax({
+                type: 'POST',
+                url: '../compras/actualizar_valido/',
+                data: {
+                    id_boleta_compra: objetos_globales.numero_switch,
+                    csrfmiddlewaretoken: '{{csrf_token}}',
+                    action: 'post'
+                },
+                success: function (json) {
+                    $("#loader_bg").hide();
+                    $('#switch_' + objetos_globales.numero_switch).bootstrapSwitch(
+                        'toggleState', true, true);
+                    toastr.success('Se cambio la validez de la boleta #' +
+                        objetos_globales.numero_switch);
+                },
+                error: function (xhr, errmsg, err) {
+                    console.log(xhr.status + ": " + xhr
+                        .responseText
+                    ); // provide a bit more info about the error to the console
+                    $("#loader_bg").hide();
+                    toastr.error('No se pudo cambiar la validez de la boleta #' +
+                        objetos_globales.numero_switch);
+                }
+            });
+        });
+
+        /*
+         * Flot Interactive Chart
+         * -----------------------
+         */
+        // We use an inline data source in the example, usually data would
+        // be fetched from a server
+        var data = [],
+            totalPoints = 100
+
+        function getRandomData() {
+
+            if (data.length > 0) {
+                data = data.slice(1)
+            }
+
+            // Do a random walk
+            while (data.length < totalPoints) {
+
+                var prev = data.length > 0 ? data[data.length - 1] : 50,
+                    y = prev + Math.random() * 10 - 5
+
+                if (y < 0) {
+                    y = 0
+                } else if (y > 100) {
+                    y = 100
+                }
+
+                data.push(y)
+            }
+
+            // Zip the generated y values with the x values
+            var res = []
+            for (var i = 0; i < data.length; ++i) {
+                res.push([i, data[i]])
+            }
+
+            return res
+        }
+
+        var interactive_plot = $.plot('#interactive', [{
+            data: getRandomData(),
+        }], {
+            grid: {
+                borderColor: '#f3f3f3',
+                borderWidth: 1,
+                tickColor: '#f3f3f3'
+            },
+            series: {
+                color: '#3c8dbc',
+                lines: {
+                    lineWidth: 2,
+                    show: true,
+                    fill: true,
+                },
+            },
+            yaxis: {
+                min: 0,
+                max: 100,
+                show: true
+            },
+            xaxis: {
+                show: true
+            }
+        })
+
+        var updateInterval = 500 //Fetch data ever x milliseconds
+        var realtime = 'on' //If == to on then fetch data every x seconds. else stop fetching
+        function update() {
+
+            interactive_plot.setData([getRandomData()])
+
+            // Since the axes don't change, we don't need to call plot.setupGrid()
+            interactive_plot.draw()
+            if (realtime === 'on') {
+                setTimeout(update, updateInterval)
+            }
+        }
+
+        //INITIALIZE REALTIME DATA FETCHING
+        if (realtime === 'on') {
+            update()
+        }
+        //REALTIME TOGGLE
+        $('#realtime .btn').click(function () {
+            if ($(this).data('toggle') === 'on') {
+                realtime = 'on'
+            } else {
+                realtime = 'off'
+            }
+            update()
+        })
+
+
+
+        // 22222222222222222222222222222
+
+        /*
+         * Flot Interactive Chart
+         * -----------------------
+         */
+        // We use an inline data source in the example, usually data would
+        // be fetched from a server
+        var data2 = [],
+            totalPoints2 = 100
+
+        function getRandomdata2() {
+
+            if (data2.length > 0) {
+                data2 = data2.slice(1)
+            }
+
+            // Do a random walk
+            while (data2.length < totalPoints2) {
+
+                var prev2 = data2.length > 0 ? data2[data2.length - 1] : 50,
+                    y2 = prev2 + Math.random() * 10 - 5
+
+                if (y2 < 0) {
+                    y2 = 0
+                } else if (y2 > 100) {
+                    y2 = 100
+                }
+
+                data2.push(y2)
+            }
+
+            // Zip the generated y2values with the x values
+            var res2 = []
+            for (var i2 = 0; i2 < data2.length; ++i2) {
+                res2.push([i2, data2[i2]])
+            }
+
+            return res2
+        }
+
+        var interactive_plot2 = $.plot('#interactive2', [{
+            data2: getRandomdata2(),
+        }], {
+            grid: {
+                borderColor: '#f3f3f3',
+                borderWidth: 1,
+                tickColor: '#f3f3f3'
+            },
+            series: {
+                color: '#3c8dbc',
+                lines: {
+                    lineWidth: 2,
+                    show: true,
+                    fill: true,
+                },
+            },
+            yaxis: {
+                min: 0,
+                max: 100,
+                show: true
+            },
+            xaxis: {
+                show: true
+            }
+        })
+
+        var updateInterval2 = 500 //Fetch data2 ever x milliseconds
+        var realtime2 = 'on' //If == to on then fetch data2 every2x seconds. else stop fetching
+
+        function update2() {
+
+            interactive_plot2.setData([getRandomData()])
+
+            // Since the axes don't change, we don't need to call plot.setupGrid()
+            interactive_plot2.draw()
+            if (realtime2 === 'on') {
+                setTimeout(update2, updateInterval2)
+            }
+        }
+
+        //INITIALIZE realtime2 data2 FETCHING
+        if (realtime2 === 'on') {
+            update2()
+        }
+        //realtime2 TOGGLE
+        $('#realtime2 .btn').click(function () {
+            if ($(this).data('toggle') === 'on') {
+                realtime2 = 'on'
+            } else {
+                realtime2 = 'off'
+            }
+            update2()
+        })
+    })
+
+    $(function () {
+        // Eventos para segunda página en adelante
+        $('#tablaHistorial').on('switchChange.bootstrapSwitch', function (e, data) {
+            objetos_globales.numero_switch = e.target.value;
+            $('#switch_' + objetos_globales.numero_switch).bootstrapSwitch('state', !data,
+                true);
+            $('#showModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        });
+
+        // Agregar más eventos en segundas páginas
+
+    });
+</script>
+
+{% endblock pie %}

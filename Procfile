@@ -1,0 +1,1 @@
+web: gunicorn --chdir pdm pdm.wsgi:application --log-file -
