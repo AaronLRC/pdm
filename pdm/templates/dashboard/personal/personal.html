@@ -109,109 +109,79 @@
                     <div class="card-body table-responsive ">
                         <div class="container">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-3">
                                     <div class="card card-primary card-outline">
                                         <div class="card-header">
                                             <h3 class="card-title">
                                                 <i class="far fa-chart-bar"></i>
                                                 Frecuencia cardíaca
                                             </h3>
-
                                             <div class="card-tools">
-                                                Tiempo real
-                                                <div class="btn-group" id="realtime" data-toggle="btn-toggle">
-                                                    <button type="button" class="btn btn-default btn-sm active"
-                                                        data-toggle="on">On</button>
-                                                    <button type="button" class="btn btn-default btn-sm"
-                                                        data-toggle="off">Off</button>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div id="interactive" style="height: 300px;"></div>
+                                            <input type="button" class="btn btn-info" value="Ver gráficas"
+                                                onclick="redirigir1()">
                                         </div>
                                         <!-- /.card-body-->
                                     </div>
                                 </div>
                                 <!-- /.card -->
-                                <div class="col-6">
+                                <div class="col-3">
                                     <div class="card card-primary card-outline">
                                         <div class="card-header">
                                             <h3 class="card-title">
                                                 <i class="far fa-chart-bar"></i>
-                                                Presión arterial
+                                                Frecuencia cardíaca
                                             </h3>
-
                                             <div class="card-tools">
-                                                Tiempo real
-                                                <div class="btn-group" id="realtime2" data-toggle="btn-toggle">
-                                                    <button type="button" class="btn btn-default btn-sm active"
-                                                        data-toggle="on">On</button>
-                                                    <button type="button" class="btn btn-default btn-sm"
-                                                        data-toggle="off">Off</button>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div id="interactive2" style="height: 300px;"></div>
-                                        </div>
-                                        <!-- /.card-body-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- row -->
-                            <p></p>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="card card-primary card-outline">
-                                        <div class="card-header">
-                                            <h3 class="card-title">
-                                                <i class="far fa-chart-bar"></i>
-                                                # Caídas
-                                            </h3>
-
-                                            <div class="card-tools">
-                                                Tiempo real
-                                                <div class="btn-group" id="realtime3" data-toggle="btn-toggle">
-                                                    <button type="button" class="btn btn-default btn-sm active"
-                                                        data-toggle="on">On</button>
-                                                    <button type="button" class="btn btn-default btn-sm"
-                                                        data-toggle="off">Off</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div id="interactive3" style="height: 300px;"></div>
+                                            <input type="button" class="btn btn-info" value="Ver gráficas"
+                                                onclick="redirigir2()">
                                         </div>
                                         <!-- /.card-body-->
                                     </div>
                                 </div>
                                 <!-- /.card -->
-                                <div class="col-6">
+                                <div class="col-3">
                                     <div class="card card-primary card-outline">
                                         <div class="card-header">
                                             <h3 class="card-title">
                                                 <i class="far fa-chart-bar"></i>
-                                                Temperatura corporal
+                                                Frecuencia cardíaca
                                             </h3>
-
                                             <div class="card-tools">
-                                                Tiempo real
-                                                <div class="btn-group" id="realtime4" data-toggle="btn-toggle">
-                                                    <button type="button" class="btn btn-default btn-sm active"
-                                                        data-toggle="on">On</button>
-                                                    <button type="button" class="btn btn-default btn-sm"
-                                                        data-toggle="off">Off</button>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div id="interactive4" style="height: 300px;"></div>
+                                            <input type="button" class="btn btn-info" value="Ver gráficas"
+                                                onclick="redirigir3()">
                                         </div>
                                         <!-- /.card-body-->
                                     </div>
                                 </div>
                                 <!-- /.card -->
+                                <div class="col-3">
+                                    <div class="card card-primary card-outline">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="far fa-chart-bar"></i>
+                                                Frecuencia cardíaca
+                                            </h3>
+                                            <div class="card-tools">
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <input type="button" class="btn btn-info" value="Ver gráficas"
+                                                onclick="redirigir4()">
+                                        </div>
+                                        <!-- /.card-body-->
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                                {% comment %}
                                 <p></p>
                                 <div class="col-12">
                                     <div class="card card-primary card-outline">
@@ -345,7 +315,7 @@
                                         <!-- /.card-body-->
                                     </div>
                                 </div>
-
+                                {% endcomment %}
                             </div>
                         </div>
 
@@ -402,11 +372,11 @@
 <!-- Toastr -->
 <script src="{% static '2/plugins/toastr/toastr.min.js' %}"></script>
 <!-- Interactive Float Chart-->
-<script src="{% static '2/plugins/flot/jquery.flot.js' %}"></script>
+{% comment %} <script src="{% static '2/plugins/flot/jquery.flot.js' %}"></script> {% endcomment %}
 <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
-<script src="{% static '2/plugins/flot-old/jquery.flot.resize.min.js' %}"></script>
+{% comment %} <script src="{% static '2/plugins/flot-old/jquery.flot.resize.min.js' %}"></script> {% endcomment %}
 <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
-<script src="{% static '2/plugins/flot-old/jquery.flot.pie.min.js' %}"></script>
+{% comment %} <script src="{% static '2/plugins/flot-old/jquery.flot.pie.min.js' %}"></script> {% endcomment %}
 
 <!-- Add here more js -->
 
@@ -414,6 +384,24 @@
 <!-- Page script -->
 <script type="text/javascript">
     var objetos_globales = {};
+
+    function redirigir1() {
+        url = "http://104.154.246.252:3000/d-solo/in33lZMMz/temperature-and-humidity?orgId=1&refresh=5s&theme=light&panelId=2";
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+
+    function redirigir2() {
+        location.href = "";
+    }
+
+    function redirigir3() {
+        location.href = "";
+    }
+
+    function redirigir4() {
+        location.href = "";
+    }
 
     $(document).ready(function () {
 
@@ -502,194 +490,6 @@
             });
         });
 
-        /*
-         * Flot Interactive Chart
-         * -----------------------
-         */
-        // We use an inline data source in the example, usually data would
-        // be fetched from a server
-        var data = [],
-            totalPoints = 100
-
-        function getRandomData() {
-
-            if (data.length > 0) {
-                data = data.slice(1)
-            }
-
-            // Do a random walk
-            while (data.length < totalPoints) {
-
-                var prev = data.length > 0 ? data[data.length - 1] : 50,
-                    y = prev + Math.random() * 10 - 5
-
-                if (y < 0) {
-                    y = 0
-                } else if (y > 100) {
-                    y = 100
-                }
-
-                data.push(y)
-            }
-
-            // Zip the generated y values with the x values
-            var res = []
-            for (var i = 0; i < data.length; ++i) {
-                res.push([i, data[i]])
-            }
-
-            return res
-        }
-
-        var interactive_plot = $.plot('#interactive', [{
-            data: getRandomData(),
-        }], {
-            grid: {
-                borderColor: '#f3f3f3',
-                borderWidth: 1,
-                tickColor: '#f3f3f3'
-            },
-            series: {
-                color: '#3c8dbc',
-                lines: {
-                    lineWidth: 2,
-                    show: true,
-                    fill: true,
-                },
-            },
-            yaxis: {
-                min: 0,
-                max: 100,
-                show: true
-            },
-            xaxis: {
-                show: true
-            }
-        })
-
-        var updateInterval = 500 //Fetch data ever x milliseconds
-        var realtime = 'on' //If == to on then fetch data every x seconds. else stop fetching
-        function update() {
-
-            interactive_plot.setData([getRandomData()])
-
-            // Since the axes don't change, we don't need to call plot.setupGrid()
-            interactive_plot.draw()
-            if (realtime === 'on') {
-                setTimeout(update, updateInterval)
-            }
-        }
-
-        //INITIALIZE REALTIME DATA FETCHING
-        if (realtime === 'on') {
-            update()
-        }
-        //REALTIME TOGGLE
-        $('#realtime .btn').click(function () {
-            if ($(this).data('toggle') === 'on') {
-                realtime = 'on'
-            } else {
-                realtime = 'off'
-            }
-            update()
-        })
-
-
-
-        // 22222222222222222222222222222
-
-        /*
-         * Flot Interactive Chart
-         * -----------------------
-         */
-        // We use an inline data source in the example, usually data would
-        // be fetched from a server
-        var data2 = [],
-            totalPoints2 = 100
-
-        function getRandomdata2() {
-
-            if (data2.length > 0) {
-                data2 = data2.slice(1)
-            }
-
-            // Do a random walk
-            while (data2.length < totalPoints2) {
-
-                var prev2 = data2.length > 0 ? data2[data2.length - 1] : 50,
-                    y2 = prev2 + Math.random() * 10 - 5
-
-                if (y2 < 0) {
-                    y2 = 0
-                } else if (y2 > 100) {
-                    y2 = 100
-                }
-
-                data2.push(y2)
-            }
-
-            // Zip the generated y2values with the x values
-            var res2 = []
-            for (var i2 = 0; i2 < data2.length; ++i2) {
-                res2.push([i2, data2[i2]])
-            }
-
-            return res2
-        }
-
-        var interactive_plot2 = $.plot('#interactive2', [{
-            data2: getRandomdata2(),
-        }], {
-            grid: {
-                borderColor: '#f3f3f3',
-                borderWidth: 1,
-                tickColor: '#f3f3f3'
-            },
-            series: {
-                color: '#3c8dbc',
-                lines: {
-                    lineWidth: 2,
-                    show: true,
-                    fill: true,
-                },
-            },
-            yaxis: {
-                min: 0,
-                max: 100,
-                show: true
-            },
-            xaxis: {
-                show: true
-            }
-        })
-
-        var updateInterval2 = 500 //Fetch data2 ever x milliseconds
-        var realtime2 = 'on' //If == to on then fetch data2 every2x seconds. else stop fetching
-
-        function update2() {
-
-            interactive_plot2.setData([getRandomData()])
-
-            // Since the axes don't change, we don't need to call plot.setupGrid()
-            interactive_plot2.draw()
-            if (realtime2 === 'on') {
-                setTimeout(update2, updateInterval2)
-            }
-        }
-
-        //INITIALIZE realtime2 data2 FETCHING
-        if (realtime2 === 'on') {
-            update2()
-        }
-        //realtime2 TOGGLE
-        $('#realtime2 .btn').click(function () {
-            if ($(this).data('toggle') === 'on') {
-                realtime2 = 'on'
-            } else {
-                realtime2 = 'off'
-            }
-            update2()
-        })
     })
 
     $(function () {

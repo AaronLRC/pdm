@@ -27,6 +27,8 @@ from pdm.views import personal_view
 from pdm.views import lista_kits_view
 from pdm.views import personal_historial_view
 
+
+
 urlpatterns = [
 
     path('admin/', admin.site.urls),
@@ -42,5 +44,8 @@ urlpatterns = [
     
     path('personal/', personal_view, name='personal-view'),
     # ------------------FIN DASHBOARD------------------
+    # -----------------INICIO API----------------
+    path('api/', include('api.urls')),
+    # ------------------FIN API------------------
 
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

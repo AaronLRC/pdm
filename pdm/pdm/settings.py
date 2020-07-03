@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'rest_framework',
+    # WEBSITE
     'pdm',
-    # 'api'
+    # API
+    'api.apps.ApiConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +59,11 @@ MIDDLEWARE = [
     # Heroku
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+#### IFRAME
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+####
+
 
 ROOT_URLCONF = 'pdm.urls'
 
@@ -85,12 +92,20 @@ WSGI_APPLICATION = 'pdm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd5tdn0osouupqh',
-        'USER': 'gsegpidpqzmeyu',
-        'PASSWORD': '2d2ce068a20105ce62cc5e13104e7120f2a0829d9a2bf187d944f6bad9bbcc69',
-        'HOST': 'ec2-52-207-25-133.compute-1.amazonaws.com',
+        'NAME': 'django',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '104.154.246.252',
         'PORT': '5432',
     },
+    # 'datadb': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'datadb',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'postgres',
+    #     'HOST': '104.154.246.252',
+    #     'PORT': '5432',
+    # },
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
     #     'NAME': 'restaurante',
@@ -108,6 +123,14 @@ DATABASES = {
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
+# API
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -162,3 +185,5 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 os.environ["DJANGO_SETTINGS_MODULE"] = "pdm.settings"
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+

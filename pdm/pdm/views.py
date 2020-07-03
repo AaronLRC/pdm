@@ -27,6 +27,9 @@ from django.db.models import Count
 from django.db.models import Sum
 from django.db.models import F
 
+##########################################################
+### Allow iFrame
+from django.views.decorators.clickjacking import xframe_options_exempt
 # ------------------------ INICIO INDEX ------------------
 
 
@@ -96,7 +99,9 @@ def lista_kits_view(request):
 
     return render(request,'dashboard/kits/lista_kits.html',locals())
 
+
 @login_required(login_url='/accounts/login')
+@xframe_options_exempt
 def personal_historial_view(request):
 
     nombre_vista = 'Dashboard | Personal'
