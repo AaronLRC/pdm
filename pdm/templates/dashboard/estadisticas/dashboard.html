@@ -23,189 +23,87 @@ to get the desired effect
 
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Macro reporte de dispositivos de sensado</h5>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fas fa-wrench"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <a href="#" class="dropdown-item">Falta agregar acciones</a>
-                                    <a class="dropdown-divider"></a> <!-- Es un divisor-->
-
+                <!-- ROWS -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header border-transparent">
+                                <h3 class="card-title">Alertas emitidas HOY (00:00 - 23:59)</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <!-- 
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    -->
                                 </div>
                             </div>
-                            {% comment %}
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
-                            </button>
-                            {% endcomment %}
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <div class="container-fluid">
+                                    
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer text-center">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-primary float-center">Ver más</a>
+                            </div>
+                            <!-- /.card-footer -->
                         </div>
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                {% comment %} <div class="card-header border-0">
-                                    <div class="d-flex justify-content-between">
-                                        <h3 class="card-title"><strong>Compras, ventas e ingresos de la
-                                                semana</strong></h3>
-                                        <a href="javascript:void(0);">Ver completo</a>
-                                    </div>
-                                </div> {% endcomment %}
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <p class="d-flex flex-column">
-                                            <span class="text-bold text-lg">{{cantidadPlatosMes}}</span>
-                                            <span>Indicadores mensuales de sensado</span>
-                                        </p>
-                                        <p class="ml-auto d-flex flex-column text-right">
-                                            <span class="text-bold text-success">
-                                                <i class="fas fa-arrow-up"></i> {{porcentajeRespectoMesAnterior}}%
-                                            </span>
-                                            <span class="text-muted">Respecto al mes anterior</span>
-                                        </p>
-                                    </div>
-                                    <!-- /.d-flex -->
+                    <!-- /.card -->
+                    <div class="col-md-4">
+                        <!-- VENTAS RESTAURANTE LIST -->
+                        <div class="card">
 
-                                    <div class="position-relative mb-4">
-                                        <canvas id="visitors-chart" height="200"></canvas>
-                                    </div>
-
-                                    <div class="d-flex flex-row justify-content-end">
-                                        <span class="mr-2">
-                                            <i class="fas fa-square text-danger"></i> P.A. &nbsp;
-                                        </span>
-                                        <span>
-                                            <i class="fas fa-square text-success"></i> F.R. &nbsp;
-                                        </span>
-                                        <span>
-                                            <i class="fas fa-square text-primary"></i> T.C. &nbsp;
-                                        </span>
-                                        <span>
-                                            <i class="fas fa-square text-fuchsia"></i> N° de caídas &nbsp;
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-4">
-                                <p class="text-center">
-                                    <strong>Cifras</strong>
-                                </p>
-
-                                <div class="progress-group">
-                                    Presión arterial media mensual
-                                    <span class="float-right"><b>90</b>/120</span>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-primary" style="width: 80%"></div>
-                                    </div>
-                                </div>
-                                <!-- /.progress-group -->
-
-                                <div class="progress-group">
-                                    Frecuencia respiratoria mensual
-                                    <span class="float-right"><b>75</b>/100</span>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-danger" style="width: 75%"></div>
-                                    </div>
-                                </div>
-
-                                <!-- /.progress-group -->
-                                <div class="progress-group">
-                                    <span class="progress-text">
-                                        Temperatura corporal media mensual
-                                    </span>
-                                    <span class="float-right"><b>37.5</b>/40</span>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-success" style="width: 60%"></div>
-                                    </div>
-                                </div>
-
-                                <!-- /.progress-group -->
-                                <div class="progress-group">
-                                    Cantidad de caídas mensuales
-                                    <span class="float-right"><b>3</b></span>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-warning" style="width: 50%"></div>
-                                    </div>
-                                </div>
-                                <!-- /.progress-group -->
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- ./card-body -->
-                    <div class="card-footer">
-                        <div class="row">
-
-                            <div class="col-sm-3 col-6">
-                                <div class="description-block border-right">
-                                    <span class="description-percentage text-warning">
-                                        <i class="fas fa-caret-left"></i>
-                                        <strong>{{ indicador1_porcentaje }}</strong>
-                                    </span>
-                                    <h5 class="description-header">{{ indicador1 }}</h5>
-                                    <span class="description-text">HORAS OPERATIVAS</span>
-                                </div>
-                                <!-- /.description-block -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-3 col-6">
-                                <div class="description-block border-right">
-                                    <span class="description-percentage text-success">
-                                        <i class="fas fa-caret-up"></i>
-                                        <strong>{{ indicador2_porcentaje }}</strong>
-                                    </span>
-                                    <h5 class="description-header">{{ indicador2 }}</h5>
-                                    <span class="description-text">HORAS SENSADAS</span>
-                                </div>
-                                <!-- /.description-block -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-3 col-6">
-                                <div class="description-block border-right">
-                                    <span class="description-percentage text-success">
-                                        <i class="fas fa-caret-up"></i>
-                                        <strong>{{ indicador3_porcentaje }}</strong>
-                                    </span>
-                                    <h5 class="description-header">{{ indicador3 }}</h5>
-                                    <span class="description-text">ANOMALÍAS ENCONTRADAS</span>
-                                </div>
-                                <!-- /.description-block -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-3 col-6">
-                                <div class="description-block">
-                                    <span class="description-percentage text-danger">
-                                        <i class="fas fa-caret-down"></i>
-                                        <strong>{{ indicador4_porcentaje }}</strong>
-                                    </span>
-                                    <h5 class="description-header">{{ indicador4 }}</h5>
-                                    <span class="description-text">CAÍDAS MENSUALES</span>
-                                </div>
-                                <!-- /.description-block -->
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                        <div class="row">
-                            <div class="col center-block text-center">
-                                <a href="dashboard/reporte_economico" class="btn btn-sm btn-primary float-center">
-                                    Ver más</a>
-                            </div>
                         </div>
                     </div>
-                    <!-- /.card-footer -->
+                    <!-- /.card -->
                 </div>
-                <!-- /.card -->
-                <!-- TABLE: LATEST ORDERS -->
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header border-transparent">
+                                <h3 class="card-title">Personas con signos vitales anómalos</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <!-- 
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    -->
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <div class="container-fluid">
+                                    
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer text-center">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-primary float-center">Ver más</a>
+                            </div>
+                            <!-- /.card-footer -->
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                    <div class="col-md-4">
+                        <!-- VENTAS RESTAURANTE LIST -->
+                        <div class="card">
 
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.row -->
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card">
@@ -231,7 +129,7 @@ to get the desired effect
                                                 <th>#Kit</th>
                                                 <th>Sensor</th>
                                                 <th>#Usuario</th>
-                                                <th>Estado</th>                                                
+                                                <th>Estado</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -245,11 +143,11 @@ to get the desired effect
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <span class="badge badge-success">Conectado y enviando</span><br>                                        
+                                                    <span class="badge badge-success">Conectado y enviando</span><br>
                                                     <span class="badge badge-info">Conectado </span><br>
                                                     <span class="badge badge-warning">Conectando...</span><br>
                                                     <span class="badge badge-danger">Sin conexión</span><br>
-                                                </td>                                                
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -269,61 +167,14 @@ to get the desired effect
                     <div class="col-md-4">
                         <!-- VENTAS RESTAURANTE LIST -->
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Últimas ventas de <strong>kits</strong></h3>
 
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    {% comment %}
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                    {% endcomment %}
-                                </div>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body p-0">
-                                <ul class="products-list product-list-in-card pl-2 pr-2">
-                                    {% for boleta in tablaBoletasVenta%}
-                                    {% if  forloop.counter <= maxItemTabla %}
-                                    <li class="item">
-                                        <div class="product-img">
-                                            <img src="{% static 'dist/img/default-150x150.png' %}" alt="Product Image"
-                                                class="img-size-50">
-                                        </div>
-                                        <div class="product-info">
-                                            <a href="javascript:void(0)" class="product-title">
-                                                N° {{boleta.boleta_venta_restaurante}}
-                                                <span class="badge badge-success float-right">
-                                                    S/. {{boleta.precio_total}}
-                                                </span>
-                                            </a>
-                                            <span class="product-description">
-                                                <strong>Nro. de productos:</strong> {{boleta.nro_productos}}
-                                                <br>
-                                                <strong>Cliente: </strong>Falta setear clientes
-                                                </br>
-                                            </span>
-                                        </div>
-                                    </li>
-                                    <!-- /.item -->
-                                    {% endif %}
-                                    {% endfor %}
-
-                                </ul>
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer text-center">
-                                <a href="javascript:void(0)" class="btn btn-sm btn-primary float-center">Ver más</a>
-                            </div>
-                            <!-- /.card-footer -->
                         </div>
-                    </div>                    
+                    </div>
                     <!-- /.card -->
                 </div>
                 <!-- /.row -->
+
+                {% comment %}
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card">
@@ -377,6 +228,7 @@ to get the desired effect
                         <!-- /.card -->
                     </div>
                     <!-- /.card -->
+                    {% endcomment %}
                     <!-- 
                     <div class="col-md-4">
                         <div class="card">

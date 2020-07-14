@@ -1,0 +1,8 @@
+
+
+django-rest-auth==0.9.5
+
+https://wsvincent.com/django-rest-framework-authentication-tutorial/ DJANGO OAUTH
+
+
+https://linuxhint.com/setup_free_ssl_cert_apache_debian/ SSL GRAFANA

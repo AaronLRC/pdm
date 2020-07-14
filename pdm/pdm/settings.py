@@ -30,6 +30,7 @@ SECRET_KEY = 'x9q@12a24zmsirgqqyxx%c04%j&3_$yy1uf&j10*7sd(zvsh+c'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+# '.ngrok.io',  # new value
 
 
 # Application definition
@@ -46,6 +47,11 @@ INSTALLED_APPS = [
     # API
     'api.apps.ApiConfig',
     'rest_framework',
+    #OAUTH
+    'rest_framework.authtoken', #LOGIN
+    'oauth2_provider', #OAUTH
+    'social_django', #OAUTH
+    'rest_framework_social_oauth2', #OAUTH
 ]
 
 MIDDLEWARE = [
@@ -61,7 +67,6 @@ MIDDLEWARE = [
 ]
 #### IFRAME
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-
 ####
 
 
@@ -78,6 +83,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #OAUTH
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -128,9 +136,26 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',        
+        # 'rest_framework.authentication.TokenAuthentication', #LOGIN
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticated',  #LOGIN
+        'rest_framework.authentication.BasicAuthentication',  #LOGIN
+        'rest_framework.authentication.SessionAuthentication',  #LOGIN
+        # 'rest_framework.authentication.TokenAuthentication',  #LOGIN
+        # 'oauth2_provider.ext.rest_framework.OAuth2Authentication',  # django-oauth-toolkit < 1.0.0 #OAUTH
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0 #OAUTH
+        'rest_framework_social_oauth2.authentication.SocialAuthentication', #OAUTH
+    ],
 }
+
+AUTHENTICATION_BACKENDS = (
+    # OAUTH
+   'rest_framework_social_oauth2.backends.DjangoOAuth2',
+   'django.contrib.auth.backends.ModelBackend',
+)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

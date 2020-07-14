@@ -10,7 +10,7 @@
 	<meta name="description" content="MedicPUCP">
 	<meta name="author" content="websmirno.site">
 	<meta name="format-detection" content="telephone=no">
-	<title>MedicPUCP</title>
+	<title>MedicPUCP - Sistemas de sensado para centros de salud</title>
 	<!-- Stylesheets -->
 	<link href=" {% static '1/vendor/slick/slick.css' %}" rel="stylesheet">
 	<link href=" {% static '1/vendor/animate/animate.min.css' %}" rel="stylesheet">
@@ -18,7 +18,7 @@
 	<link href=" {% static '1/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.css' %}" rel="stylesheet">
 	<link href=" {% static '1/icons/style.css' %}" rel="stylesheet">
 	<!--Favicon-->
-	<link rel="icon" href=" {% static '1/images/favicon.png' %}" type="image/x-icon">
+	<link rel="icon" href=" {% static '1/images/favicon.ico' %}" type="image/x-icon">
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
@@ -65,12 +65,16 @@
 			<div class="container">
 				<div class="row align-items-center">
 					<div class="col-auto d-flex align-items-center">
-						<div class="header-phone"><i class="icon-telephone"></i>
-							<a href="tel:1-847-555-5555">{{ text_cel }}</a></div>
-						<div class="header-info"><i class="icon-placeholder2"></i>{{ text_address }}
+						<div class="header-phone">
+							<i class="icon-telephone"></i>
+							<a href="tel:1-847-555-5555">{{ text_cel }}</a>
 						</div>
-						<div class="header-info"><i class="icon-black-envelope"></i><a
-								href="mailto:{{ text_email }}">{{ text_email }}</a></div>
+						<div class="header-info">
+							<i class="icon-placeholder2"></i>{{ text_address }}
+						</div>
+						<div class="header-info">
+							<i class="icon-black-envelope"></i><a href="mailto:{{ text_email }}">{{ text_email }}</a>
+						</div>
 					</div>
 					<div class="col-auto ml-auto d-flex align-items-center">
 						<span class="header-social">
@@ -143,11 +147,15 @@
 											<a href="blog.html" class="nav-link dropdown-toggle"
 												data-toggle="dropdown">Blog</a>
 											<ul class="dropdown-menu">
-												<li><a class="dropdown-item" href="blog.html">Blog Posts</a></li>
-												<li><a class="dropdown-item" href="blog-grid.html">Blog Grid Posts</a>
+												<li>
+													<a class="dropdown-item" href="blog.html">Blog Posts</a>
 												</li>
-												<li><a class="dropdown-item" href="blog-post-page.html">Blog Single
-														Post</a></li>
+												<li>
+													<a class="dropdown-item" href="blog-grid.html">Blog Grid Posts</a>
+												</li>
+												<li>
+													<a class="dropdown-item" href="blog-post-page.html">Blog Single Post</a>
+												</li>
 											</ul>
 										</li>
 										<li class="nav-item">
@@ -340,10 +348,13 @@
 											src="{% static '1/images/content/signature.png' %}" alt=""
 											class="img-fluid">
 									</div>
-									<div class="mt-0 mt-lg-15 mt-xl-3"></div>
+									<div class="mt-0 mt-lg-15 mt-xl-3">
+
+									</div>
 									<a href="#" class="btn-link" data-toggle="modal"
-										data-target="#modalBookingForm">Ingresar a la plataforma<i
-											class="icon-right-arrow"></i></a>
+										data-target="#modalBookingForm">Ingresar a la plataforma
+										<i class="icon-right-arrow"></i>
+									</a>
 								</div>
 							</div>
 						</div>
@@ -364,16 +375,24 @@
 						<div class="service-box-rotator js-service-box-rotator">
 							<div class="service-box service-box-greybg service-box--hiddenbtn">
 								<div class="service-box-caption text-center">
-									<div class="service-box-icon"><i class="icon-man"></i></div>
-									<div class="service-box-icon-bg"><i class="icon-man"></i></div>
+									<div class="service-box-icon">
+										<i class="icon-emergency"></i>
+									</div>
+									<div class="service-box-icon-bg">
+										<i class="icon-emergency"></i>
+									</div>
 									<h3 class="service-box-title">{{ text_kit_1 }}</h3>
 									<p>{{ text_kit_2 }}</p>
-									<div class="btn-wrap"><a href="service-page.html" class="btn"><i
-												class="icon-right-arrow"></i><span>Leer más</span><i
-												class="icon-right-arrow"></i></a></div>
+									<div class="btn-wrap"><a href="service-page.html" class="btn">
+											<i class="icon-right-arrow"></i>
+											<span>Leer más</span>
+											<i class="icon-right-arrow">
+											</i>
+										</a>
+									</div>
 								</div>
 							</div>
-							<div class="service-box service-box-greybg service-box--hiddenbtn">
+							<!-- <div class="service-box service-box-greybg service-box--hiddenbtn">
 								<div class="service-box-caption text-center">
 									<div class="service-box-icon"><i class="icon-injecting"></i></div>
 									<div class="service-box-icon-bg"><i class="icon-injecting"></i></div>
@@ -385,7 +404,7 @@
 												class="icon-right-arrow"></i><span>Leer más</span><i
 												class="icon-right-arrow"></i></a></div>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<div class="col-8 order-2">
@@ -395,24 +414,29 @@
 							<div class="service-box-caption text-center w-50 ml-auto">
 								<h3 class="service-box-title">{{ text_kit_5 }}</h3>
 								<p>{{ text_kit_6 }}</p>
-								<div class="btn-wrap"><a href="service-page.html" class="btn"><i
-											class="icon-right-arrow"></i><span>Leer más</span><i
-											class="icon-right-arrow"></i></a></div>
+								<div class="btn-wrap"><a href="{{ vista_3d_medikit }}" class="btn">
+										<i class="icon-right-arrow"></i>
+										<span>Ver dispositivo en 3D</span>
+										<i class="icon-right-arrow">
+										</i>
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>
-					<!-- 
 					<div class="col-8 order-3 order-lg-4 order-xl-3">
 						<div class="service-box">
 							<div class="service-box-image" data-bg="{% static '1/images/content/service-04.jpg' %}">
 							</div>
 							<div class="service-box-caption text-center w-50 ml-auto">
-								<h3 class="service-box-title">Breast Procedures</h3>
-								<p>Cosmetic breast surgery can help you get the breast
-									<br> shape & size you want</p>
-								<div class="btn-wrap"><a href="service-page.html" class="btn"><i
-											class="icon-right-arrow"></i><span>Know more</span><i
-											class="icon-right-arrow"></i></a></div>
+								<h3 class="service-box-title">{{ text_kit_7 }}</h3>
+								<p>{{ text_kit_8 }}</p>
+								<div class="btn-wrap"><a href="{{ vista_3d_mediband }}" class="btn">
+										<i class="icon-right-arrow"></i>
+										<span>Ver dispositivo en 3D</span>
+										<i class="icon-right-arrow"></i>
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -420,17 +444,23 @@
 						<div class="service-box-rotator js-service-box-rotator">
 							<div class="service-box service-box-greybg service-box--hiddenbtn">
 								<div class="service-box-caption text-center">
-									<div class="service-box-icon"><i class="icon-body"></i></div>
-									<div class="service-box-icon-bg"><i class="icon-body"></i></div>
-									<h3 class="service-box-title">Body Procedures</h3>
-									<p>Body Procedures are dedicated to aesthetic and functional enhancement of your
-										body</p>
-									<div class="btn-wrap"><a href="service-page.html" class="btn"><i
-												class="icon-right-arrow"></i><span>Know more</span><i
-												class="icon-right-arrow"></i></a></div>
+									<div class="service-box-icon">
+										<i class="icon-ambulance"></i>
+									</div>
+									<div class="service-box-icon-bg">
+										<i class="icon-ambulance"></i>
+									</div>
+									<h3 class="service-box-title">{{ text_kit_9 }}</h3>
+									<p>{{ text_kit_10 }}</p>
+									<div class="btn-wrap"><a href="service-page.html" class="btn">
+											<i class="icon-right-arrow"></i>
+											<span>Leer más</span>
+											<i class="icon-right-arrow"></i>
+										</a>
+									</div>
 								</div>
 							</div>
-							<div class="service-box service-box-greybg service-box--hiddenbtn">
+							<!-- <div class="service-box service-box-greybg service-box--hiddenbtn">
 								<div class="service-box-caption text-center">
 									<div class="service-box-icon"><i class="icon-mommy"></i></div>
 									<div class="service-box-icon-bg"><i class="icon-mommy"></i></div>
@@ -441,63 +471,11 @@
 												class="icon-right-arrow"></i><span>Know more</span><i
 												class="icon-right-arrow"></i></a></div>
 								</div>
-							</div>
+							</div> -->
 						</div>
-					</div> 
-				-->
-				</div>
-				<div class="row no-gutters services-box-wrap services-box-wrap-mobile">
-					<div class="service-box-rotator js-service-box-rotator">
-						<div class="service-box service-box-greybg service-box--hiddenbtn">
-							<div class="service-box-caption text-center">
-								<div class="service-box-icon"><i class="icon-man"></i></div>
-								<div class="service-box-icon-bg"><i class="icon-man"></i></div>
-								<h3 class="service-box-title">{{ test_kit_1 }}</h3>
-								<p>{{ text_kit_2 }}</p>
-								<div class="btn-wrap"><a href="service-page.html" class="btn"><i
-											class="icon-right-arrow"></i><span>Leer más</span><i
-											class="icon-right-arrow"></i></a></div>
-							</div>
-						</div>
-						<div class="service-box service-box-greybg service-box--hiddenbtn">
-							<div class="service-box-caption text-center">
-								<div class="service-box-icon"><i class="icon-injecting"></i></div>
-								<div class="service-box-icon-bg"><i class="icon-injecting"></i></div>
-								<h3 class="service-box-title">{{ text_kit_3 }}</h3>
-								<p>{{ text_kit_4 }}</p>
-								<div class="btn-wrap"><a href="service-page.html" class="btn">
-										<i class="icon-right-arrow"></i><span>Leer más</span>
-										<i class="icon-right-arrow"></i></a></div>
-							</div>
-						</div>
-						<div class="service-box service-box-greybg service-box--hiddenbtn">
-							<div class="service-box-caption text-center">
-								<div class="service-box-icon"><i class="icon-body"></i></div>
-								<div class="service-box-icon-bg"><i class="icon-body"></i></div>
-								<h3 class="service-box-title">{{ text_kit_5 }}</h3>
-								<p> {{ text_kit_6 }}
-								</p>
-								<div class="btn-wrap"><a href="service-page.html" class="btn"><i
-											class="icon-right-arrow"></i><span>Leer más</span><i
-											class="icon-right-arrow"></i></a></div>
-							</div>
-						</div>
-						<!-- 
-						<div class="service-box service-box-greybg service-box--hiddenbtn">
-							<div class="service-box-caption text-center">
-								<div class="service-box-icon"><i class="icon-mommy"></i></div>
-								<div class="service-box-icon-bg"><i class="icon-mommy"></i></div>
-								<h3 class="service-box-title">Mommy Makeover</h3>
-								<p>The goal of a mommy makeover is to restore the shape and appearance of a woman's body
-									after childbearing.</p>
-								<div class="btn-wrap"><a href="service-page.html" class="btn"><i
-											class="icon-right-arrow"></i><span>Know more</span><i
-											class="icon-right-arrow"></i></a></div>
-							</div>
-						</div> 
-						-->
 					</div>
 				</div>
+
 			</div>
 		</div>
 		<!--//section services-->
@@ -613,7 +591,7 @@
 					<div class="col">
 						<div class="counter-box">
 							<div class="counter-box-icon"><i class="icon-tooth-1"></i></div>
-							<div class="counter-box-number"><span class="count" data-to="10" data-speed="1500">0</span>K
+							<div class="counter-box-number"><span class="count" data-to="10000" data-speed="6000">0</span>
 							</div>
 							<div class="decor"></div>
 							<div class="counter-box-text">Kits vendidos</div>
@@ -622,7 +600,7 @@
 					<div class="col">
 						<div class="counter-box">
 							<div class="counter-box-icon"><i class="icon-team"></i></div>
-							<div class="counter-box-number"><span class="count" data-to="50" data-speed="1500">0</span>
+							<div class="counter-box-number"><span class="count" data-to="50" data-speed="5000">0</span>
 							</div>
 							<div class="decor"></div>
 							<div class="counter-box-text">Especialistas</div>
@@ -631,7 +609,7 @@
 					<div class="col">
 						<div class="counter-box">
 							<div class="counter-box-icon"><i class="icon-placeholder3"></i></div>
-							<div class="counter-box-number"><span class="count" data-to="4" data-speed="1500">0</span>
+							<div class="counter-box-number"><span class="count" data-to="4" data-speed="5000">0</span>
 							</div>
 							<div class="decor"></div>
 							<div class="counter-box-text">Locales</div>
